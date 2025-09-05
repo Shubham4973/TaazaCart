@@ -10,7 +10,8 @@ import productRouter from './routes/productRoutes.js';
 import cartRouter from './routes/cartRoute.js';
 import addressRouter from './routes/addressRoute.js';
 import orderRouter from './routes/orderRoute.js';
-import { stripeWebhooks } from '../../greencart/server/controllers/orderController.js';
+import { stripeWebhook } from './controllers/orderController.js';
+
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -22,7 +23,7 @@ await connectCloudinary();
 const allowedOrigins = ['http://localhost:5173'];
 
 
-app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks)
+app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhook)
 
 // Normal middlewares
 app.use(express.json());
